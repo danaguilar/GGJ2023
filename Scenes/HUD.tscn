@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Fonts/HUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Sprites/ExtraLives.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/Pause.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=4]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 30.0
+margin_right = -30.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="LifeBar" type="MarginContainer" parent="TopBar"]
+margin_right = 480.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/LifeBar"]
+margin_right = 480.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/LifeBar/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/LifeBar/HBoxContainer/MarginContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="TopBar/LifeBar/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/LifeBar/HBoxContainer/MarginContainer2"]
+margin_right = 50.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="TopBar/LifeBar/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/LifeBar/HBoxContainer/MarginContainer3"]
+margin_right = 50.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="TimeBar" type="MarginContainer" parent="TopBar"]
+margin_left = 484.0
+margin_right = 964.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Time" type="Label" parent="TopBar/TimeBar"]
+margin_top = 10.0
+margin_right = 480.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0.1278, 0.56445, 0.71, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "10:00"
+align = 2
+valign = 1
+
+[node name="Pause" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -276.5
+margin_top = -60.0
+margin_right = 276.5
+margin_bottom = 60.0
+rect_scale = Vector2( 0.997872, 1 )
+rect_pivot_offset = Vector2( 277, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "PAUSE"
+align = 1
+valign = 1
