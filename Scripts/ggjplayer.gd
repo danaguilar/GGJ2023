@@ -1,12 +1,19 @@
 extends KinematicBody2D
 
+
+signal lives_left(lives_left)
+
 # Public
 
 onready var sprite = $Sprite
 onready var camera = $Camera
 onready var dust   = $Dust
+onready var hurtZone = $HurtZone
+onready var killZone = $JumpKillZone
 onready var gameManager = $"../GameManager"
 
+
+export var lives = 3
 export var movementSpeed = 10
 export var gravityPower = 10
 export var jumpPower = 20
@@ -23,6 +30,7 @@ var gravity = 0
 var IsNormalColor = true
 var colorTimer = 0
 var normalColor = Color(1,1,1,1)
+var dead = false
 
 var doubleJump = true
 var previouslyFloored = false
@@ -36,32 +44,24 @@ var initialPosition
 
 func _ready():
 	initialPosition = position
+	emit_signal("lives_left", lives)
 
-
-func _process(delta):
-	if(colorTimer > flashingSpeed):
-		colorTimer = 0
-		if(IsNormalColor):
-			$Sprite.modulate = lowHealthFlashingColor
-			IsNormalColor = false
-		else:
-			$Sprite.modulate = normalColor
-			IsNormalColor = true
-	colorTimer = colorTimer + 1
 	
 func _physics_process(delta):
+	if dead :
+		gravity += gravityPower
+		position.y += gravity * delta
+		
+		return
 	applyControls()
 	applyGravity()
 	applyAnimation()
 	
-	# Out of bounds
-	
 	# Apply movement
 	
 	velocity = velocity.linear_interpolate(movementVelocity * 10, delta * 15)
-	move_and_slide(velocity + Vector2(0, gravity), Vector2(0, -1))
 	
-	# Effects
+	move_and_slide(velocity + Vector2(0, gravity), Vector2(0, -1))
 	
 	sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 8)
 	
@@ -117,12 +117,10 @@ func applyGravity():
 	if is_on_ceiling(): gravity = 0
 	
 func jump(multiplier):
-	
 	gravity = -jumpPower * multiplier * 10
 	sprite.scale = Vector2(0.5, 1.5)
 	
 func shoot():
-	
 	var _projectile = projectile.instance()
 	get_tree().get_root().add_child(_projectile)
 	
@@ -139,7 +137,6 @@ func shoot():
 # Set animations
 
 func applyAnimation():
-	
 	if is_on_floor():
 		if abs(velocity.x) > 60:
 			sprite.play("walk")
@@ -149,5 +146,29 @@ func applyAnimation():
 		sprite.play("jump")
 
 func die():
+	collision_layer = 4
+	collision_mask = 4
+	sprite.scale = Vector2(1, 1)
+	sprite.stop()
+	sprite.rotation_degrees = 180
+	dead = true
+	gravity = -120
+
+
+func respawn():
+	collision_layer = 7
+	collision_mask = 7
+	sprite.rotation_degrees = 0
+	sprite.play()
+	dead = false
 	position = initialPosition
-	print("I have died")
+	lives = lives - 1
+	emit_signal("lives_left", lives)
+
+
+func _on_Bee_hit_player():
+	die()
+
+func _on_Bee_goomba_jump():
+	jump(1.3)
+	doubleJump = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/ggjplayer.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/player.tres" type="SpriteFrames" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 6.0
 height = 4.0
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 1.25 )
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -31,6 +34,8 @@ scale_random = 1.0
 color_ramp = SubResource( 2 )
 
 [node name="Player" type="KinematicBody2D" groups=["npc", "player"]]
+collision_layer = 7
+collision_mask = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -40,14 +45,20 @@ __meta__ = {
 position = Vector2( 0, 8 )
 frames = ExtResource( 2 )
 animation = "idle"
+playing = true
 offset = Vector2( 0, -8 )
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="HurtZone" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
+
+[node name="JumpKillZone" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7 )
+shape = SubResource( 5 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.25, 0.25 )
+process_mode = 0
 limit_left = -240
 limit_top = -200
 limit_right = 620

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/bee.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/bee.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 8 )
+
+[node name="Bee" type="KinematicBody2D"]
+position = Vector2( 40, 8 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+movementSpeed = 30
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -4 )
+frames = ExtResource( 1 )
+frame = 1
+playing = true
+flip_h = true
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 5 )

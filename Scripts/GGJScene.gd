@@ -1,6 +1,5 @@
 extends Node
 
-signal paused(isPaused)
 onready var HUD = $"../HUD"
 
 var isPaused = false
@@ -9,7 +8,7 @@ var isPaused = false
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		isPaused = !isPaused
 		HUD.SetPause(isPaused)

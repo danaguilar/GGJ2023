@@ -2,17 +2,23 @@ extends CanvasLayer
 
 
 onready var pause = $Pause
-onready var lifeBar = $TopBar/LifeBar
+onready var lifeBar = $TopBar/LifeBar/HBoxContainer
 onready var time = $TopBar/TimeBar/Time
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-		
 
 func SetPause(var isPaused: bool):
 	pause.visible = isPaused
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func SetLives(var livesLeft: int):
+	for life in lifeBar.get_children():
+		life.visible = false
+	var lifeCounter = 0
+	for life in lifeBar.get_children():
+		life.visible = true
+		lifeCounter = lifeCounter + 1
+		print(lifeCounter)
+		if(lifeCounter >= livesLeft):
+			return
+
+
+func _on_Player_lives_left(lives_left):
+	SetLives(lives_left)
