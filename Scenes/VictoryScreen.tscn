@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Sprites/HoverStartButtonStyle.tres" type="StyleBox" id=1]
+[ext_resource path="res://Sprites/PressedStartButtonStyle.tres" type="StyleBox" id=2]
+[ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/FlatStartButtonStyle.tres" type="StyleBox" id=4]
+[ext_resource path="res://Sprites/tilemap.tres" type="TileSet" id=5]
+[ext_resource path="res://Sprites/bee.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Fonts/RPGSystem.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 128
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 7 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 157, 452 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+cell_half_offset = 1
+format = 1
+tile_data = PoolIntArray( -1507318, 0, 0, -196609, 0, 65538, -262138, 0, 65539, -196604, 0, 65537, -65537, 0, 65537, -131069, 0, 196613, -131066, 0, 65538, -2, 0, 131080, -1, 0, 65536, -65534, 0, 196610, 65535, 0, 196611, 1, 0, 196612, 3, 0, 196610, 4, 0, 196616, 5, 0, 196613, 131070, 0, 196616, 65536, 0, 196608, 65538, 0, 196616, 65540, 0, 196617, 65542, 0, 196616 )
+
+[node name="Bee" type="AnimatedSprite" parent="."]
+position = Vector2( 91, 113 )
+rotation = -0.345575
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+frame = 1
+speed_scale = 0.6
+playing = true
+
+[node name="Bee2" type="AnimatedSprite" parent="."]
+position = Vector2( 970, 377 )
+rotation = 0.233874
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+speed_scale = 0.4
+playing = true
+
+[node name="Bee4" type="AnimatedSprite" parent="."]
+position = Vector2( 306, 249 )
+rotation = 0.115192
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+frame = 1
+speed_scale = 0.5
+playing = true
+
+[node name="Bee5" type="AnimatedSprite" parent="."]
+position = Vector2( 874, 112 )
+rotation = -0.240855
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+speed_scale = 0.5
+playing = true
+
+[node name="Bee6" type="AnimatedSprite" parent="."]
+position = Vector2( 483, 46 )
+rotation = 0.115192
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+speed_scale = 0.8
+playing = true
+
+[node name="Bee7" type="AnimatedSprite" parent="."]
+position = Vector2( 655, 263 )
+rotation = 0.115192
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+frame = 1
+speed_scale = 0.6
+playing = true
+
+[node name="Bee8" type="AnimatedSprite" parent="."]
+position = Vector2( 103, 242 )
+rotation = 0.115192
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+frame = 1
+speed_scale = 0.7
+playing = true
+
+[node name="Bee9" type="AnimatedSprite" parent="."]
+position = Vector2( 855, 467 )
+rotation = -0.418879
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+speed_scale = 0.7
+playing = true
+
+[node name="Bee3" type="AnimatedSprite" parent="."]
+position = Vector2( 157, 452 )
+rotation = -0.0837758
+scale = Vector2( 8, 8 )
+frames = ExtResource( 6 )
+frame = 1
+speed_scale = 0.8
+playing = true
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -336.0
+margin_top = -208.0
+margin_right = 336.0
+margin_bottom = -64.0
+rect_pivot_offset = Vector2( 233, 146 )
+custom_fonts/font = SubResource( 1 )
+text = "You WON!"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -138.0
+margin_top = 88.0
+margin_right = 145.0
+margin_bottom = 159.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 4 )
+text = "Play Again"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -154,7 +154,6 @@ func die():
 	dead = true
 	gravity = -120
 
-
 func respawn():
 	collision_layer = 7
 	collision_mask = 7
@@ -163,8 +162,12 @@ func respawn():
 	dead = false
 	position = initialPosition
 	lives = lives - 1
+	if(lives <= 0):
+		get_tree().change_scene("res://Scenes/GameOverScreen.tscn")
 	emit_signal("lives_left", lives)
 
+func win():
+	get_tree().change_scene("res://Scenes/VictoryScreen.tscn")
 
 func _on_Bee_hit_player():
 	die()

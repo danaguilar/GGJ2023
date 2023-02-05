@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -16,6 +16,5 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
-	if body.has_method("die"):
-		body.respawn()
+func _on_Button_pressed():
+	get_tree().change_scene("res://Scenes/GGJScene.tscn")
